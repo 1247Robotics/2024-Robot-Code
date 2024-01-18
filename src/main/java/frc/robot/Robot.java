@@ -7,10 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Controllers.P4Controller;
+
 import com.revrobotics.CANSparkMax;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
 /**
@@ -28,7 +27,8 @@ public class Robot extends TimedRobot {
   // STATIC VARIABLES ARE DEFINED IN src/main/java/frc/robot/Definitions.java
 
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
-  private final Drive driver = new Drive(mp);
+  private final P4Controller controller = new P4Controller(0);
+  private final NewDrive driver = new NewDrive(controller, mp);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    driver.pullMoveController(2);
+    driver.pullController();
     driver.drive();
   }
 
