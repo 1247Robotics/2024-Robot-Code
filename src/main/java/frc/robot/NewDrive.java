@@ -12,8 +12,8 @@ public class NewDrive {
 
     private double X = 0;
     private double Y = 0;
-    private double[] Xarr = new double[10];
-    private double[] Yarr = new double[10];
+    private double[] XBuffer = new double[5];
+    private double[] YBuffer = new double[5];
     private double lastUpdate = 0;
 
     private boolean debug = false;
@@ -39,36 +39,36 @@ public class NewDrive {
 
     public void setMove(double x, double y) {
         double Xavg = 0;
-        for (double _x : Xarr) {
+        for (double _x : XBuffer) {
             Xavg += _x;            
         }
-        Xavg /= Xarr.length;
+        Xavg /= XBuffer.length;
         double Yavg = 0;
-        for (double _y : Yarr) {
+        for (double _y : YBuffer) {
             Yavg += _y;            
         }
-        Yavg /= Yarr.length;
+        Yavg /= YBuffer.length;
 
-        for (int i = 0; i < Xarr.length - 1; i++) {
-            Xarr[i] = Xarr[i + 1];
+        for (int i = 0; i < XBuffer.length - 1; i++) {
+            XBuffer[i] = XBuffer[i + 1];
         }
-        for (int i = 0; i < Yarr.length - 1; i++) {
-            Yarr[i] = Yarr[i + 1];
+        for (int i = 0; i < YBuffer.length - 1; i++) {
+            YBuffer[i] = YBuffer[i + 1];
         }
 
         if (x+0.05 >= Xavg) {
-            Xarr[Xarr.length - 1] = Xavg;
+            XBuffer[XBuffer.length - 1] = Xavg;
             X = Xavg;
         } else {
-            Xarr[Xarr.length - 1] = x;
+            XBuffer[XBuffer.length - 1] = x;
             X = x;
         }
 
         if (y+0.05 >= Yavg) {
-            Yarr[Yarr.length - 1] = Yavg;
+            YBuffer[YBuffer.length - 1] = Yavg;
             Y = Yavg;
         } else {
-            Yarr[Yarr.length - 1] = y;
+            YBuffer[YBuffer.length - 1] = y;
             Y = y;
         }
         lastUpdate = System.currentTimeMillis();
@@ -88,7 +88,7 @@ public class NewDrive {
 
     public String toString() {
         if (debug) {
-            return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate + "Xarr: " + Xarr + "Yarr: " + Yarr;
+            return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate + "Xarr: " + XBuffer + "Yarr: " + YBuffer;
         }
         return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate;
     }
