@@ -4,12 +4,14 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
 public class Drive {
   private final Joystick leftStick = new Joystick(Definitions.joystickId);
   private final XboxController xbox = new XboxController(Definitions.xboxId);
+  private final PS4Controller ps5 = new PS4Controller(Definitions.ps5Id);
 
   private final DifferentialDrive drive;
 
@@ -40,6 +42,10 @@ public class Drive {
     } else if (controller == 1) {
       moveX = xbox.getLeftX();
       moveY = xbox.getLeftY();
+      lastUpdate = System.currentTimeMillis();
+    } else if (controller == 2) {
+      moveX = ps5.getLeftX();
+      moveY = ps5.getLeftY();
       lastUpdate = System.currentTimeMillis();
     }
   }

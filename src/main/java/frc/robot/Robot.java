@@ -51,8 +51,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    driver.pullMoveController(0);
-    driver.drive();
+    
   }
 
   /**
@@ -92,7 +91,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    driver.pullMoveController(2);
+    driver.drive();
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
