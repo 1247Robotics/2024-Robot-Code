@@ -86,11 +86,21 @@ public class NewDrive {
         this.debug = debug;
     }
 
+    public String arrToString(double[] arr) {
+        String str = "[";
+        for (double d : arr) {
+            str += d + ", ";
+        }
+        str = str.substring(0, str.length() - 2);
+        str += "]";
+        return str;
+    }
+
     public String toString() {
         if (debug) {
-            return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate + "Xarr: " + XBuffer + "Yarr: " + YBuffer;
+            return "X: " + X + ", Y: " + Y + ", Last Update: " + lastUpdate + ", Xarr: " + arrToString(XBuffer) + ", Yarr: " + arrToString(YBuffer);
         }
-        return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate;
+        return "X: " + X + ", Y: " + Y + ", Last Update: " + lastUpdate;
     }
         
     
