@@ -2,7 +2,7 @@ package frc.robot.Controllers;
 
 import edu.wpi.first.wpilibj.PS4Controller;
 
-public class P4Controller extends BaseController {
+public class P4Controller extends Controller {
     private final PS4Controller ps4;
 
     public P4Controller(int id) {

@@ -2,7 +2,7 @@ package frc.robot.Controllers;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class JoystickController extends BaseController {
+public class JoystickController extends Controller {
     private final Joystick joystick;
 
     public JoystickController(int id) {
@@ -10,13 +10,13 @@ public class JoystickController extends BaseController {
     }
 
     @Override
-    public double getLeftX() {
-        return joystick.getX();
+    public double getLeftY() {
+        return joystick.getY();
     }
 
     @Override
-    public double getLeftY() {
-        return joystick.getY();
+    public double getRightX() {
+        return joystick.getZ();
     }
 
     @Override

@@ -2,7 +2,7 @@ package frc.robot.Controllers;
 
 import edu.wpi.first.wpilibj.PS5Controller;
 
-public class P5Controller extends BaseController {
+public class P5Controller extends Controller {
     private final PS5Controller ps5;
 
     public P5Controller(int id) {

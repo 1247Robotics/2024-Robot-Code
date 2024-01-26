@@ -2,7 +2,7 @@ package frc.robot.Controllers;
 
 import edu.wpi.first.wpilibj.XboxController;
 
-public class XController extends BaseController{
+public class XController extends Controller{
     private final XboxController xbox;
 
     public XController(int id) {

@@ -2,11 +2,15 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 
-import frc.robot.Controllers.BaseController;
+import frc.robot.Controllers.Controller;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+/**
+ * The NewDrive class represents the drivetrain of the robot.
+ * It controls the movement of the robot using a controller input.
+ */
 public class NewDrive {
-    private BaseController controller;
+    private Controller controller;
 
     private final DifferentialDrive drive;
 
@@ -18,7 +22,16 @@ public class NewDrive {
 
     private boolean debug = false;
 
-    public NewDrive(BaseController controller, CANSparkMax flMotor, CANSparkMax frMotor, CANSparkMax blMotor, CANSparkMax brMotor) {
+    /**
+     * Constructs a NewDrive object with the specified controller and motor configuration.
+     * 
+     * @param controller the controller used to control the robot's movement
+     * @param flMotor the front left motor
+     * @param frMotor the front right motor
+     * @param blMotor the back left motor
+     * @param brMotor the back right motor
+     */
+    public NewDrive(Controller controller, CANSparkMax flMotor, CANSparkMax frMotor, CANSparkMax blMotor, CANSparkMax brMotor) {
         this.controller = controller;
 
         // Make the back motors slaves of the front motors
@@ -28,15 +41,31 @@ public class NewDrive {
         drive = new DifferentialDrive(flMotor, frMotor);
     }
 
-    public NewDrive(BaseController controller, MotorPack mp) {
+    /**
+     * Constructs a NewDrive object with the specified controller and motor pack.
+     * 
+     * @param controller the controller used to control the robot's movement
+     * @param mp the motor pack containing the front left, front right, back left, and back right motors
+     */
+    public NewDrive(Controller controller, MotorPack mp) {
         this(controller, mp.getFlMotor(), mp.getFrMotor(), mp.getBlMotor(), mp.getBrMotor());
     }
 
+    /**
+     * Updates the controller input for the robot's movement.
+     * This method should be called periodically to update the robot's movement.
+     */
     public void pullController() {
         this.setMove(controller.getRightX(), controller.getLeftY());
         lastUpdate = System.currentTimeMillis();
     }
 
+    /**
+     * Sets the desired movement of the robot.
+     * 
+     * @param x the desired X-axis movement
+     * @param y the desired Y-axis movement
+     */
     public void setMove(double x, double y) {
         double Xavg = 0;
         for (double _x : XBuffer) {
@@ -74,6 +103,10 @@ public class NewDrive {
         lastUpdate = System.currentTimeMillis();
     }
 
+    /**
+     * Drives the robot based on the current movement settings.
+     * This method should be called periodically to update the robot's movement.
+     */
     public void drive() {
         if (System.currentTimeMillis() - lastUpdate > 250) {
             X = 0;
@@ -82,16 +115,24 @@ public class NewDrive {
         drive.arcadeDrive(Y, X);
     }
 
+    /**
+     * Sets the debug mode of the NewDrive object.
+     * 
+     * @param debug true to enable debug mode, false otherwise
+     */
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
 
+    /**
+     * Returns a string representation of the NewDrive object.
+     * 
+     * @return a string representation of the NewDrive object
+     */
     public String toString() {
         if (debug) {
             return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate + "Xarr: " + XBuffer + "Yarr: " + YBuffer;
         }
         return "X: " + X + ", Y: " + Y + "Last Update: " + lastUpdate;
     }
-        
-    
 }
