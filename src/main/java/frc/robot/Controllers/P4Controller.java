@@ -11,22 +11,30 @@ public class P4Controller extends Controller {
 
     @Override
     public double getLeftX() {
-        return ps4.getLeftX();
+        double x = ps4.getLeftX();
+        x = Math.abs(x) < 0.05 ? 0 : x;
+        return x;
     }
 
     @Override
     public double getLeftY() {
-        return ps4.getLeftY();
+        double y = ps4.getLeftY();
+        y = Math.abs(y) < 0.05 ? 0 : y;
+        return y;
     }
 
     @Override
     public double getRightX() {
-        return ps4.getRightX();
+        double x = ps4.getRightX();
+        x = Math.abs(x) < 0.05 ? 0 : x;
+        return x;
     }
 
     @Override
     public double getRightY() {
-        return ps4.getRightY();
+        double y = ps4.getRightY();
+        y = Math.abs(y) < 0.05 ? 0 : y;
+        return y;
     }
 
     @Override
