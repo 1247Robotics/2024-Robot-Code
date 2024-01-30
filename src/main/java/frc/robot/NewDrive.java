@@ -153,6 +153,32 @@ public class NewDrive {
             updateXBuffer(x);
             X = calculateXAvg();
         }
+
+        boolean yAvgIsPositive = Yavg > 0.09;
+        boolean yAvgIsNegative = Yavg < -0.09;
+
+        if (yAvgIsPositive) {
+            y = clamp(y, 0, 1);
+            if (y + 0.05 > Yavg) {
+                updateYBuffer(y);
+                Y = calculateYAvg();
+            } else {
+                updateYBuffer(y);
+                Y = y;
+            }
+        } else if (yAvgIsNegative) {
+            y = clamp(y, -1, 0);
+            if (y - 0.05 < Yavg) {
+                updateYBuffer(y);
+                Y = calculateYAvg();
+            } else {
+                updateYBuffer(y);
+                Y = y;
+            }
+        } else {
+            updateYBuffer(y);
+            Y = calculateYAvg();
+        }
         lastUpdate = System.currentTimeMillis();
     }
 
