@@ -93,8 +93,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     driver.pullController();
-    System.out.println(driver);
-    // driver.drive();
+    // System.out.println(driver);
+    driver.drive();
   }
 
   /** This function is called once when the robot is disabled. */
