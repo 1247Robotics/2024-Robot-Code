@@ -60,6 +60,54 @@ public class NewDrive {
         lastUpdate = System.currentTimeMillis();
     }
 
+    private void shiftXBuffer() {
+        for (int i = 0; i < XBuffer.length - 1; i++) {
+            XBuffer[i] = XBuffer[i + 1];
+        }
+    }
+
+    private void shiftYBuffer() {
+        for (int i = 0; i < YBuffer.length - 1; i++) {
+            YBuffer[i] = YBuffer[i + 1];
+        }
+    }
+
+    private double calculateXAvg() {
+        double Xavg = 0;
+        for (double _x : XBuffer) {
+            Xavg += _x;            
+        }
+        Xavg /= XBuffer.length;
+        return Xavg;
+    }
+
+    private double calculateYAvg() {
+        double Yavg = 0;
+        for (double _y : YBuffer) {
+            Yavg += _y;            
+        }
+        Yavg /= YBuffer.length;
+        return Yavg;
+    }
+
+    private void updateXBuffer(double x) {
+        XBuffer[XBuffer.length - 1] = x;
+    }   
+
+    private void updateYBuffer(double y) {
+        YBuffer[YBuffer.length - 1] = y;
+    }
+
+    private double clamp(double val, double min, double max) {
+        if (val < min) {
+            return min;
+        }
+        if (val > max) {
+            return max;
+        }
+        return val;
+    }
+
     /**
      * Sets the desired movement of the robot.
      * 
@@ -67,38 +115,39 @@ public class NewDrive {
      * @param y the desired Y-axis movement
      */
     public void setMove(double x, double y) {
-        double Xavg = 0;
-        for (double _x : XBuffer) {
-            Xavg += _x;            
-        }
-        Xavg /= XBuffer.length;
-        double Yavg = 0;
-        for (double _y : YBuffer) {
-            Yavg += _y;            
-        }
-        Yavg /= YBuffer.length;
+        double Xavg = calculateXAvg();
+        double Yavg = calculateYAvg();
 
-        for (int i = 0; i < XBuffer.length - 1; i++) {
-            XBuffer[i] = XBuffer[i + 1];
-        }
-        for (int i = 0; i < YBuffer.length - 1; i++) {
-            YBuffer[i] = YBuffer[i + 1];
-        }
+        shiftXBuffer();
+        shiftYBuffer();
 
-        if (x+0.05 >= Xavg) {
-            XBuffer[XBuffer.length - 1] = Xavg;
-            X = Xavg;
+        /*
+         * Ramp up speed over time but stop immediately
+         * 
+         * If x > Xavg then set X to Xavg
+         * If x < Xavg then set X to x
+         */
+
+        boolean xAvgIsPositive = Xavg > 0.05;
+
+        if (xAvgIsPositive) {
+            x = clamp(x, 0, 1);
+            if (x + 0.05 > Xavg) {
+                updateXBuffer(x);
+                X = calculateXAvg();
+            } else {
+                updateXBuffer(x);
+                X = x;
+            }
         } else {
-            XBuffer[XBuffer.length - 1] = x;
-            X = x;
-        }
-
-        if (y+0.05 >= Yavg) {
-            YBuffer[YBuffer.length - 1] = Yavg;
-            Y = Yavg;
-        } else {
-            YBuffer[YBuffer.length - 1] = y;
-            Y = y;
+            x = clamp(x, -1, 0);
+            if (x - 0.05 < Xavg) {
+                updateXBuffer(x);
+                X = calculateXAvg();
+            } else {
+                updateXBuffer(x);
+                X = x;
+            }
         }
         lastUpdate = System.currentTimeMillis();
     }
