@@ -121,13 +121,6 @@ public class NewDrive {
         shiftXBuffer();
         shiftYBuffer();
 
-        /*
-         * Ramp up speed over time but stop immediately
-         * 
-         * If x > Xavg then set X to Xavg
-         * If x < Xavg then set X to x
-         */
-
         boolean xAvgIsPositive = Xavg > 0.09;
         boolean xAvgIsNegative = Xavg < -0.09;
 
@@ -203,6 +196,12 @@ public class NewDrive {
         this.debug = debug;
     }
 
+    /**
+     * Converts an array of doubles to a string representation.
+     * 
+     * @param arr the array of doubles
+     * @return the string representation of the array
+     */
     public String arrToString(double[] arr) {
         String str = "[";
         for (double d : arr) {
@@ -213,6 +212,11 @@ public class NewDrive {
         return str;
     }
 
+    /**
+     * Returns a string representation of the NewDrive object.
+     * 
+     * @return the string representation of the NewDrive object
+     */
     public String toString() {
         if (debug) {
             return "X: " + X + ", Y: " + Y + ", Last Update: " + lastUpdate + ", Xarr: " + arrToString(XBuffer) + ", Yarr: " + arrToString(YBuffer);
