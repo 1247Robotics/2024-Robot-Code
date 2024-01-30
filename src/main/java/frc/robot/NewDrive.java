@@ -128,7 +128,7 @@ public class NewDrive {
          * If x < Xavg then set X to x
          */
 
-        boolean xAvgIsPositive = Xavg > 0.05;
+        boolean xAvgIsPositive = Xavg > 0.09;
 
         if (xAvgIsPositive) {
             x = clamp(x, 0, 1);
