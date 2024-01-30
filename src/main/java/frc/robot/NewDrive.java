@@ -150,8 +150,8 @@ public class NewDrive {
                 X = x;
             }
         } else {
-            updateXBuffer(0);
-            X = 0;
+            updateXBuffer(x);
+            X = calculateXAvg();
         }
         lastUpdate = System.currentTimeMillis();
     }
