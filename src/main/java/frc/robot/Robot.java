@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   // STATIC VARIABLES ARE DEFINED IN src/main/java/frc/robot/Definitions.java
 
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
-  private final P4Controller controller = new P4Controller(0);
+  private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final NewDrive driver = new NewDrive(controller, mp);
 
   /**
