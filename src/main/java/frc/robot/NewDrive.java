@@ -129,6 +129,7 @@ public class NewDrive {
          */
 
         boolean xAvgIsPositive = Xavg > 0.09;
+        boolean xAvgIsNegative = Xavg < -0.09;
 
         if (xAvgIsPositive) {
             x = clamp(x, 0, 1);
@@ -139,7 +140,7 @@ public class NewDrive {
                 updateXBuffer(x);
                 X = x;
             }
-        } else {
+        } else if (xAvgIsNegative) {
             x = clamp(x, -1, 0);
             if (x - 0.05 < Xavg) {
                 updateXBuffer(x);
@@ -148,6 +149,9 @@ public class NewDrive {
                 updateXBuffer(x);
                 X = x;
             }
+        } else {
+            updateXBuffer(0);
+            X = 0;
         }
         lastUpdate = System.currentTimeMillis();
     }
