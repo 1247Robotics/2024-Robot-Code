@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
 
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
-  private final NewDrive driver = new NewDrive(controller, mp);
+  private final Drive driver = new Drive(controller, mp);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,7 +51,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    driver.setDebug(true);
   }
 
   /**
@@ -93,7 +92,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     driver.pullController();
-    // System.out.println(driver);
     driver.drive();
   }
 
