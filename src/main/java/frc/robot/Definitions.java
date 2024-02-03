@@ -1,6 +1,14 @@
 package frc.robot;
 
 public class Definitions {
+
+    // Drive buffer sizes
+    public static final int BOX_BOT = 5;
+    public static final int LOW = 10;
+    public static final int MEDIUM = 15;
+    public static final int HIGH = 20;
+    public static final int EXTREME = 25;
+
     public static final short flId = 3;
     public static final short frId = 2;
     public static final short blId = 4;

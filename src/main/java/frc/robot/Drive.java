@@ -51,6 +51,11 @@ public class Drive {
         this(controller, mp.getFlMotor(), mp.getFrMotor(), mp.getBlMotor(), mp.getBrMotor());
     }
 
+    public void setBuffers(int bufferSize) {
+        XBuffer = new double[bufferSize];
+        YBuffer = new double[bufferSize];
+    }
+
     /**
      * Updates the controller input for the robot's movement.
      * This method should be called periodically to update the robot's movement.
