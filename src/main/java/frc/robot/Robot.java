@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
-    driver.setBuffers(Definitions.BOX_BOT);   
+    driver.setBuffers(Definitions.BOX_BOT); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
   }
 
   /**
