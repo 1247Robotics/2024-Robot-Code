@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Controllers.P4Controller;
 
-import com.revrobotics.CANSparkMax;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,6 +27,10 @@ public class Robot extends TimedRobot {
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
+  private final Climber climb = new Climber(Definitions.lClimberId, Definitions.rClimberId);
+
+  int time;
+  int offset;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,6 +43,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     driver.setBuffers(Definitions.BOX_BOT); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
+    climb.setMultiplier(0.2);
   }
 
   /**
@@ -106,11 +109,16 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when test mode is enabled. */
   @Override
-  public void testInit() {}
+  public void testInit() {
+    // current time in second
+  }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    time = (int) System.currentTimeMillis() / 1000;
+    climb.set(time % 2 == 0 ? 0.5 : -0.5);
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
