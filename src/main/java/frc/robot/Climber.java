@@ -13,6 +13,7 @@ public class Climber {
     public Climber(int lClimberId, int rClimberId) {
         lClimber = new CANSparkMax(lClimberId, CANSparkMax.MotorType.kBrushless);
         rClimber = new CANSparkMax(rClimberId, CANSparkMax.MotorType.kBrushless);
+        rClimber.setInverted(true);
     }
 
     public void set(double speed) {
