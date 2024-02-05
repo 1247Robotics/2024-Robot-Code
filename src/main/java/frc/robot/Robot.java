@@ -119,6 +119,7 @@ public class Robot extends TimedRobot {
     time = (int) System.currentTimeMillis() / 1000;
     double spee = 1;
     climb.set(time % 2 == 0 ? spee : -spee);
+    
   }
 
   /** This function is called once when the robot is first started up. */
