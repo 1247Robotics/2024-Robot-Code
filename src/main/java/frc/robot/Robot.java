@@ -97,6 +97,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     driver.pullController();
     driver.drive();
+    climb.stop();
   }
 
   /** This function is called once when the robot is disabled. */
@@ -117,7 +118,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     time = (int) System.currentTimeMillis() / 1000;
-    double spee = 1;
+    double spee = 0.2;
     climb.set(time % 2 == 0 ? spee : -spee);
 
   }

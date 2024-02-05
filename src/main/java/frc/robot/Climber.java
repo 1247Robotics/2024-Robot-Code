@@ -1,5 +1,7 @@
 package frc.robot;
 
+// DO NOT TOUCH ANYTHING HERE
+
 // spark max
 import com.revrobotics.CANSparkMax;
 
@@ -14,7 +16,6 @@ public class Climber {
     }
 
     public void set(double speed) {
-        System.out.println(speed);
         lClimber.set(speed);
         rClimber.set(speed);
     }
