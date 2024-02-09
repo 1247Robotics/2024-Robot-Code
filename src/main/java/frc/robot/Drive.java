@@ -54,6 +54,7 @@ public class Drive {
     public void setBuffers(int bufferSize) {
         XBuffer = new double[bufferSize];
         YBuffer = new double[bufferSize];
+        System.out.println("Set buffers to "+bufferSize);
     }
 
     /**

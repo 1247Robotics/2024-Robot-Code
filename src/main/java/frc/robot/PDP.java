@@ -10,7 +10,7 @@ public class PDP {
     }
 
     public boolean isBrownout() {
-        return pdp.getVoltage() < 8.5;
+        return pdp.getVoltage() < 7;
     }
 
 
