@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
       System.out.println("Brownout. Set buffer size to " + bufferSize);
       bufferSize++;
       driver.setBuffers(bufferSize);
-      untilRecheck = 10;
+      untilRecheck = 100;
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
   }
