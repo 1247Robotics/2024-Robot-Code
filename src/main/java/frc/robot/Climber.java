@@ -15,8 +15,8 @@ public class Climber {
 
     public void set(double speed) {
         System.out.println(speed);
-        lClimber.set(speed);
-        rClimber.set(speed);
+        lClimber.set(speed * multiplier);
+        rClimber.set(speed * multiplier);
     }
 
     public void stop() {
