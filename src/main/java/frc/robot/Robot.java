@@ -117,8 +117,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     time = (int) System.currentTimeMillis() / 1000;
-    double spee = 1;
-    climb.set(time % 2 == 0 ? spee : -spee);
+    climb.set(time % 2 == 0 ? 0.5 : -0.5);
   }
 
   /** This function is called once when the robot is first started up. */
