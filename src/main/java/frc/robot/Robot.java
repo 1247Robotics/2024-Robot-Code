@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   private final Drive driver = new Drive(controller, mp);
   private final PDP pdp = new PDP();
   private int bufferSize = 1;
+  private int untilRecheck = 0;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -53,11 +54,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // System.out.println("Voltage: " + pdp.getV());
-    if (pdp.isBrownout()) {
+    if (pdp.isBrownout() && untilRecheck <= 0) {
       System.out.println("Brownout. Set buffer size to " + bufferSize);
       bufferSize++;
       driver.setBuffers(bufferSize);
+      untilRecheck = 10;
     }
+    untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
   }
 
   /**
