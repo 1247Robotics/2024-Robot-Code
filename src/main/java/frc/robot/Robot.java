@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
   private final PDP pdp = new PDP();
-  private int bufferSize = Definitions.BOX_BOT;
+  private int bufferSize = 1;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // System.out.println("Voltage: " + pdp.getV());
     if (pdp.isBrownout()) {
-      System.out.println("Brownout");
+      System.out.println("Brownout. Set buffer size to " + bufferSize);
       bufferSize++;
       driver.setBuffers(bufferSize);
     }
