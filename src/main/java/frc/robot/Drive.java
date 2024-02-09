@@ -16,8 +16,8 @@ public class Drive {
 
     private double X = 0;
     private double Y = 0;
-    private double[] XBuffer = new double[5];
-    private double[] YBuffer = new double[5];
+    private double[] XBuffer;
+    private double[] YBuffer;
     private double lastUpdate = 0;
 
     private boolean debug = false;

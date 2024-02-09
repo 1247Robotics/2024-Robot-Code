@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
   private final PDP pdp = new PDP();
-  private int bufferSize = 0;
+  private int bufferSize = Definitions.BOX_BOT;
 
   /**
    * This function is run when the robot is first started up and should be used for any
