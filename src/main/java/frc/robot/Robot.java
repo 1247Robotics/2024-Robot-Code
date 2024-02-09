@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
   private final PDP pdp = new PDP();
+  private int bufferSize = 0;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
-    driver.setBuffers(Definitions.BOX_BOT); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
+    driver.setBuffers(bufferSize); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
   }
 
   /**
@@ -51,7 +52,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    System.out.println("Voltage: " + pdp.getV());
+    // System.out.println("Voltage: " + pdp.getV());
+    if (pdp.isBrownout()) {
+      System.out.println("Brownout");
+      bufferSize++;
+      driver.setBuffers(bufferSize);
+    }
   }
 
   /**
