@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   private final PDP pdp = new PDP();
   private int bufferSize = 1;
   private int untilRecheck = 0;
-  private int theHardestPartOfProgramingIsNamingYourVariables = 0;
+  private int fiev = 0;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
     // System.out.println("Voltage: " + pdp.getV());
     if (pdp.isBrownout()) {
 
-      theHardestPartOfProgramingIsNamingYourVariables += 5;
-      if (untilRecheck <= 0 && theHardestPartOfProgramingIsNamingYourVariables >= 5) {
+      fiev += 5;
+      if (untilRecheck <= 0 && fiev >= 5) {
         bufferSize++;
         driver.setBuffers(bufferSize);
       }
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
       
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
-    theHardestPartOfProgramingIsNamingYourVariables = theHardestPartOfProgramingIsNamingYourVariables > 0 ? theHardestPartOfProgramingIsNamingYourVariables-1 : 0;
+    fiev = fiev > 0 ? fiev-1 : 0;
   }
 
   /**
