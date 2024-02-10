@@ -58,11 +58,11 @@ public class Robot extends TimedRobot {
     if (pdp.isBrownout()) {
 
       fiev += 5;
-      if (untilRecheck <= 0 && fiev >= 5) {
+      if (untilRecheck <= 0 && fiev > 5) {
         bufferSize++;
         driver.setBuffers(bufferSize);
       }
-      untilRecheck = 5;
+      untilRecheck = 4;
       
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
