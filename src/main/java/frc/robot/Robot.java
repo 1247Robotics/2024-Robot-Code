@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Controllers.P4Controller;
+import frc.robot.Controllers.P5Controller;
 
 
 /**
@@ -25,7 +26,7 @@ public class Robot extends TimedRobot {
   // STATIC VARIABLES ARE DEFINED IN src/main/java/frc/robot/Definitions.java
 
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
-  private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
+  private final P5Controller controller = new P5Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
   private final PDP pdp = new PDP();
   private int bufferSize = 1;
@@ -58,7 +59,7 @@ public class Robot extends TimedRobot {
     if (pdp.isBrownout()) {
 
       fiev += 5;
-      if (untilRecheck <= 0 && fiev > 5) {
+      if (untilRecheck <= 0) {
         bufferSize++;
         driver.setBuffers(bufferSize);
       }
