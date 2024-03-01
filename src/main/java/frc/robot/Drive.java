@@ -66,6 +66,9 @@ public class Drive {
         lastUpdate = System.currentTimeMillis();
     }
 
+    public int getBufferSize() {
+        return XBuffer.length;
+
     private void shiftXBuffer() {
         for (int i = 0; i < XBuffer.length - 1; i++) {
             XBuffer[i] = XBuffer[i + 1];
