@@ -66,18 +66,33 @@ public class Drive {
         lastUpdate = System.currentTimeMillis();
     }
 
+    public int getBufferSize() {
+        return XBuffer.length;
+    }
+    
+    /**
+     * Shifts the XBuffer array to the left by one index.
+     */
     private void shiftXBuffer() {
         for (int i = 0; i < XBuffer.length - 1; i++) {
             XBuffer[i] = XBuffer[i + 1];
         }
     }
 
+    /**
+     * Shifts the YBuffer array to the left by one index.
+     */
     private void shiftYBuffer() {
         for (int i = 0; i < YBuffer.length - 1; i++) {
             YBuffer[i] = YBuffer[i + 1];
         }
     }
 
+    /**
+     * Calculates the average of the XBuffer array.
+     *
+     * @return the average of the XBuffer array
+     */
     private double calculateXAvg() {
         double Xavg = 0;
         for (double _x : XBuffer) {
@@ -87,6 +102,11 @@ public class Drive {
         return Xavg;
     }
 
+    /**
+     * Calculates the average of the YBuffer array.
+     *
+     * @return the average of the YBuffer array
+     */
     private double calculateYAvg() {
         double Yavg = 0;
         for (double _y : YBuffer) {
@@ -96,14 +116,32 @@ public class Drive {
         return Yavg;
     }
 
+    /**
+     * Updates the XBuffer array with the specified value.
+     *
+     * @param x the value to update the XBuffer array with
+     */
     private void updateXBuffer(double x) {
         XBuffer[XBuffer.length - 1] = x;
     }   
 
+    /**
+     * Updates the YBuffer array with the specified value.
+     *
+     * @param y the value to update the YBuffer array with
+     */
     private void updateYBuffer(double y) {
         YBuffer[YBuffer.length - 1] = y;
     }
 
+    /**
+     * Clamps the specified value between the specified minimum and maximum values.
+     *
+     * @param val the value to clamp
+     * @param min the minimum value
+     * @param max the maximum value
+     * @return the clamped value
+     */
     private double clamp(double val, double min, double max) {
         if (val < min) {
             return min;
@@ -115,21 +153,30 @@ public class Drive {
     }
 
     /**
-     * Sets the desired movement of the robot.
+     * Sets the desired movement of the robot where x is turning and y is forward/backward movement.
      * 
      * @param x the desired X-axis movement
      * @param y the desired Y-axis movement
      */
     public void setMove(double x, double y) {
+
+        //#region Buffer movement to counter brownout (X axis)
+        // Get the averages of the buffer arrays
         double Xavg = calculateXAvg();
         double Yavg = calculateYAvg();
 
+        // Shift the buffer arrays
         shiftXBuffer();
         shiftYBuffer();
 
+        // Fix stupid bullshit that sends the robot into objects for no reason
         boolean xAvgIsPositive = Xavg > 0.09;
         boolean xAvgIsNegative = Xavg < -0.09;
 
+        // If the average is positive, clamp the value to 1 and check if the new value is greater than the average.
+        // If it is, update the buffer array and recalculate the average.
+        // If it isn't, just update the buffer array.
+        // TLDR: Smooth the input if it is higher or equal to the average, otherwise send the raw input as the control.
         if (xAvgIsPositive) {
             x = clamp(x, 0, 1);
             if (x + 0.05 > Xavg) {
@@ -139,6 +186,11 @@ public class Drive {
                 updateXBuffer(x);
                 X = x;
             }
+
+        // If the average is negative, clamp the value to -1 and check if the new value is less than the average
+        // If it is, update the buffer array and recalculate the average.
+        // If it isn't, just update the buffer array.
+        // TLDR: Smooth the input if it is lower or equal to the average, otherwise send the raw input as the control.
         } else if (xAvgIsNegative) {
             x = clamp(x, -1, 0);
             if (x - 0.05 < Xavg) {
@@ -152,10 +204,16 @@ public class Drive {
             updateXBuffer(x);
             X = calculateXAvg();
         }
+        //#endregion Buffer movement to counter brownout
 
+        //#region Buffer movement to counter brownout (Y axis)
         boolean yAvgIsPositive = Yavg > 0.09;
         boolean yAvgIsNegative = Yavg < -0.09;
 
+        // If the average is positive, clamp the value to 1 and check if the new value is greater than the average.
+        // If it is, update the buffer array and recalculate the average.
+        // If it isn't, just update the buffer array.
+        // TLDR: Smooth the input if it is higher or equal to the average, otherwise send the raw input as the control.
         if (yAvgIsPositive) {
             y = clamp(y, 0, 1);
             if (y + 0.05 > Yavg) {
@@ -165,6 +223,10 @@ public class Drive {
                 updateYBuffer(y);
                 Y = y;
             }
+        // If the average is negative, clamp the value to -1 and check if the new value is less than the average
+        // If it is, update the buffer array and recalculate the average.
+        // If it isn't, just update the buffer array.
+        // TLDR: Smooth the input if it is lower or equal to the average, otherwise send the raw input as the control.
         } else if (yAvgIsNegative) {
             y = clamp(y, -1, 0);
             if (y - 0.05 < Yavg) {
@@ -178,6 +240,7 @@ public class Drive {
             updateYBuffer(y);
             Y = calculateYAvg();
         }
+        //#endregion Buffer movement to counter brownout
         lastUpdate = System.currentTimeMillis();
     }
 
@@ -186,6 +249,7 @@ public class Drive {
      * This method should be called periodically to update the robot's movement.
      */
     public void drive() {
+        // Using information from > 250 ms ago is a bad idea so if it is, turn off the motors
         if (System.currentTimeMillis() - lastUpdate > 250) {
             X = 0;
             Y = 0;
