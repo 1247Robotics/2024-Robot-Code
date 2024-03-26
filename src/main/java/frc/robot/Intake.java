@@ -12,11 +12,13 @@ public class Intake {
     public Intake(Controller controller){
         this.controller = controller;
         this.intakeMotor = new CANSparkMax(Definitions.intakeId,CANSparkLowLevel.MotorType.kBrushless);
+        this.intakeMotor.setInverted(true);
+        this.intakeMotor.burnFlash();
     }
 
     public void update(){
         if(controller.getRightBumper()){
-            intakeMotor.set(-controller.getLeftY());
+            intakeMotor.set(controller.getLeftY());
         } else {
             intakeMotor.set(0);
         }
