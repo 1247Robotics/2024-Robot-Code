@@ -80,5 +80,15 @@ public class P4Controller extends Controller {
     @Override
     public double getPadAsFloat() {
         return ps4.getPOV();
-    }    
+    }
+
+    @Override
+    public boolean getLeftJoystickButton() {
+        return ps4.getL3Button();
+    }
+
+    @Override
+    public boolean getRightJoystickButton() {
+        return ps4.getR3Button();
+    }
 }

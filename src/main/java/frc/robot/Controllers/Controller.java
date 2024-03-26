@@ -163,4 +163,22 @@ public class Controller {
     public boolean getButtonY() {
         return false;
     }
+
+    /**
+     * Returns the value of left joystick button
+     * 
+     * @return the value of left joystick button
+     */
+    public boolean getLeftJoystickButton() {
+        return false;
+    }
+
+    /**
+     * Returns the value of right joystick button
+     * 
+     * @return the value of right joystick button
+     */
+    public boolean getRightJoystickButton() {
+        return false;
+    }
 }

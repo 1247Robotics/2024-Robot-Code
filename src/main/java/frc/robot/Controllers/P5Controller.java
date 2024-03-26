@@ -93,4 +93,14 @@ public class P5Controller extends Controller {
     public boolean getButtonY() {
         return ps5.getTriangleButton();
     }
+
+    @Override
+    public boolean getLeftJoystickButton() {
+        return ps5.getL3Button();
+    }
+
+    @Override
+    public boolean getRightJoystickButton() {
+        return ps5.getR3Button();
+    }
 }
