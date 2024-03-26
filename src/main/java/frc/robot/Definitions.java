@@ -14,6 +14,11 @@ public class Definitions {
     public static final short blId = 4;
     public static final short brId = 1;
 
+    public static final int intakeId = 11;
+    public static final int intakeSuckButton = 6;
+    public static final int intakeBlowButton = 5;
+
+
     public static final byte ACC_ADDRESS = 0x40;
     public static final byte ACC_RESET = 0x10;
     public static final byte ACC_PWR = 0x0D;

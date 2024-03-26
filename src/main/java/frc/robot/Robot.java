@@ -26,8 +26,9 @@ public class Robot extends TimedRobot {
   // STATIC VARIABLES ARE DEFINED IN src/main/java/frc/robot/Definitions.java
 
   private final MotorPack mp = new MotorPack(Definitions.flId, Definitions.frId, Definitions.blId, Definitions.brId);
-  private final P5Controller controller = new P5Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
+  private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
+  private final Intake intake = new Intake(controller);
   private final PDP pdp = new PDP();
   private int bufferSize = 1;
   private int untilRecheck = 0;
@@ -55,7 +56,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // System.out.println("Voltage: " + pdp.getV());
-    if (pdp.isBrownout()) {
+    if (pdp.isBrownout()){ 
 
       if (untilRecheck <= 0) {
         bufferSize++;
@@ -107,6 +108,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     driver.pullController();
     driver.drive();
+    intake.update();
+    
   }
 
   /** This function is called once when the robot is disabled. */

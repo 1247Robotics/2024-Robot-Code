@@ -62,7 +62,7 @@ public class Drive {
      * This method should be called periodically to update the robot's movement.
      */
     public void pullController() {
-        this.setMove(controller.getRightX(), controller.getLeftY());
+        this.setMove(controller.getLeftX(), -controller.getLeftY());
         lastUpdate = System.currentTimeMillis();
     }
 
