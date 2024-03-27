@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   private DigitalOutput led = new DigitalOutput(0);
   private AnalogInput lightSensor = new AnalogInput(0);
   private boolean read = false;
+  private boolean light = true;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -71,12 +72,16 @@ public class Robot extends TimedRobot {
       
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
-    if (read) {
-      int lightLevel = lightSensor.getValue();
-      System.out.println("Light Level: " + lightLevel);
+
+    if (light) {
+      if (read) {
+        int lightLevel = lightSensor.getValue();
+        System.out.println("Light Level: " + lightLevel);
+      }
+      read = !read;
+      led.set(read);
     }
-    read = !read;
-    led.set(read);
+    light = !light;
 
   }
 
