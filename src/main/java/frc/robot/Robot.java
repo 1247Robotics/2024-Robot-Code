@@ -78,9 +78,7 @@ public class Robot extends TimedRobot {
 
     if (light) {
       if (read) {
-        led2.set(true);
         int lightLevel = lightSensor.getValue();
-        led2.set(false);
         System.out.println("Light Level: " + lightLevel);
       }
       read = !read;
