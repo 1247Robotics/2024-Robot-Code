@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
     boolean gay = motionSensor.get();
+    motionSensor.get();
     System.out.println("Motion Sensor: " + gay);
   }
 
