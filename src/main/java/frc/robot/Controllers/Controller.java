@@ -181,4 +181,71 @@ public class Controller {
     public boolean getRightJoystickButton() {
         return false;
     }
+
+    /**
+     * Returns the value of the button at the specified index.
+     * 
+     * 0 = A
+     * 1 = B
+     * 2 = X
+     * 3 = Y
+     * 4 = Left Bumper
+     * 5 = Right Bumper
+     * 6 = Left Joystick Button
+     * 7 = Right Joystick Button
+     * 
+     * @param input
+     * @return
+     */
+    public boolean getButton(int input) {
+        return switch (input) {
+            case 0 -> getButtonA();
+            case 1 -> getButtonB();
+            case 2 -> getButtonX();
+            case 3 -> getButtonY();
+            case 4 -> getLeftBumper();
+            case 5 -> getRightBumper();
+            case 6 -> getLeftJoystickButton();
+            case 7 -> getRightJoystickButton();
+            default -> false;
+        };
+    }
+
+    /**
+     * Returns the value of the trigger at the specified index.
+     * 
+     * 0 = Left Trigger
+     * 1 = Right Trigger
+     * 
+     * @param input
+     * @return
+     */
+    public double getTrigger(int input) {
+        return switch (input) {
+            case 0 -> getLeftTrigger();
+            case 1 -> getRightTrigger();
+            default -> 0;
+        };
+    }
+
+    /**
+     * Returns the value of the joystick at the specified index.
+     * 
+     * 0 = Left X
+     * 1 = Left Y
+     * 2 = Right X
+     * 3 = Right Y
+     * 
+     * @param input
+     * @return
+     */
+    public double getJoystick(int input) {
+        return switch (input) {
+            case 0 -> getLeftX();
+            case 1 -> getLeftY();
+            case 2 -> getRightX();
+            case 3 -> getRightY();
+            default -> 0;
+        };
+    }
 }
