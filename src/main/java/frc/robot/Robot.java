@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
   private AnalogInput lightSensor = new AnalogInput(0);
   private boolean read = false;
   private boolean light = true;
+  
+  private final Shooter shooter = new Shooter(Definitions.shooterId);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -129,7 +131,7 @@ public class Robot extends TimedRobot {
     driver.pullController();
     driver.drive();
     intake.update();
-    
+    shooter.update(controller.getTrigger(Definitions.shooterTrigger));
   }
 
   /** This function is called once when the robot is disabled. */
