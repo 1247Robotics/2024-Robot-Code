@@ -13,6 +13,7 @@ public class Intake {
         this.controller = controller;
         this.intakeMotor = new CANSparkMax(Definitions.intakeId,CANSparkLowLevel.MotorType.kBrushless);
         this.intakeMotor.setInverted(true);
+        this.intakeMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
         this.intakeMotor.burnFlash();
     }
 
