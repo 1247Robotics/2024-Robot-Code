@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Controllers.P4Controller;
 import frc.robot.Controllers.P5Controller;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,7 +34,9 @@ public class Robot extends TimedRobot {
   private final PDP pdp = new PDP();
   private int bufferSize = 1;
   private int untilRecheck = 0;
-  private DigitalInput motionSensor = new DigitalInput(0);
+  private DigitalOutput led = new DigitalOutput(0);
+  private AnalogInput lightSensor = new AnalogInput(0);
+  private boolean read = false;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -67,9 +71,13 @@ public class Robot extends TimedRobot {
       
     }
     untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
-    boolean gay = motionSensor.get();
-    motionSensor.get();
-    System.out.println("Motion Sensor: " + gay);
+    if (read) {
+      int lightLevel = lightSensor.getValue();
+      System.out.println("Light Level: " + lightLevel);
+    }
+    read = !read;
+    led.set(read);
+
   }
 
   /**
