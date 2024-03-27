@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
   private int bufferSize = 1;
   private int untilRecheck = 0;
   private DigitalOutput led = new DigitalOutput(0);
+  private DigitalOutput led2 = new DigitalOutput(1);
   private AnalogInput lightSensor = new AnalogInput(0);
   private boolean read = false;
   private boolean light = true;
@@ -75,7 +76,9 @@ public class Robot extends TimedRobot {
 
     if (light) {
       if (read) {
+        led2.set(true);
         int lightLevel = lightSensor.getValue();
+        led2.set(false);
         System.out.println("Light Level: " + lightLevel);
       }
       read = !read;
