@@ -4,6 +4,7 @@ package frc.robot.Controllers;
  * The Controller class represents a generic controller with various input methods.
  */
 public class Controller {
+    private boolean fixTriggers = false;
     /**
      * Constructs a new Controller object.
      */
@@ -247,5 +248,31 @@ public class Controller {
             case 3 -> getRightY();
             default -> 0;
         };
+    }
+
+    /**
+     * Fixes the stupid "-1 is the new zero" software design decision that killed a neo
+     * 
+     * @param fix
+     */
+    public void makeTriggersMakeSense(boolean fix) {
+        fixTriggers = fix;
+    }
+
+    /**
+     * Only should be called by children to automatically fix triggers being -1 when 0
+     * 
+     * @param input
+     * @return
+     */
+    public double correctTriggers(double input) {
+        return fixTriggers ? (input + 1) / 2 : input;
+    }
+
+    public double clamp(double x, double min, double max) {
+    }
+
+    public void thisIsZero() {
+
     }
 }
