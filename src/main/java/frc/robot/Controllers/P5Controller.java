@@ -11,32 +11,38 @@ public class P5Controller extends Controller {
 
     @Override
     public double getLeftX() {
-        return ps5.getLeftX();
+        // return ps5.getLeftX();
+        return super.threshold(leftTriggerThreshold, 0);
     }
 
     @Override
     public double getLeftY() {
-        return ps5.getLeftY();
+        // return ps5.getLeftY();
+        return super.threshold(leftYThreshold, 1);
     }
 
     @Override
     public double getRightX() {
-        return ps5.getRightX();
+        // return ps5.getRightX();
+        return super.threshold(rightXThreshold, 2);
     }
 
     @Override
     public double getRightY() {
-        return ps5.getRightY();
+        // return ps5.getRightY();
+        return super.threshold(rightYThreshold, 3);
     }
 
     @Override
     public double getLeftTrigger() {
-        return ps5.getL2Axis();
+        // return ps5.getL2Axis();
+        return super.correctTriggers(super.threshold(leftTriggerThreshold, 4));
     }
 
     @Override
     public double getRightTrigger() {
-        return ps5.getR2Axis();
+        // return ps5.getR2Axis();
+        return super.correctTriggers(super.threshold(rightTriggerThreshold, 5));
     }
 
     @Override

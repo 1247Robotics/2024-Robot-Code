@@ -5,6 +5,15 @@ package frc.robot.Controllers;
  */
 public class Controller {
     private boolean fixTriggers = false;
+    
+    // Thresholds for analog inputs
+    static double leftXThreshold = 0.0;
+    static double leftYThreshold = 0.0;
+    static double rightXThreshold = 0.0;
+    static double rightYThreshold = 0.0;
+    static double leftTriggerThreshold = 0.0;
+    static double rightTriggerThreshold = 0.0;
+
     /**
      * Constructs a new Controller object.
      */
@@ -269,9 +278,47 @@ public class Controller {
         return fixTriggers ? (input + 1) / 2 : input;
     }
 
-    public double clamp(double x, double min, double max) {}
+    public double clamp(double x, double min, double max) {
+        return Math.min(Math.max(x, min), max);
+    }
 
+    /**
+     * Thresholds analog inputs
+     * 
+     * 0 = Left X
+     * 1 = Left Y
+     * 2 = Right X
+     * 3 = Right Y
+     * 4 = Left Trigger
+     * 5 = Right Trigger
+     *
+     * @param input
+     * @param inputNum
+     * 
+     * @return the thresholded value of the input
+     */
+    public double threshold(double input, int inputNum) {
+        return switch (inputNum) {
+            case 0 -> Math.abs(input) > leftXThreshold ? input : 0;
+            case 1 -> Math.abs(input) > leftYThreshold ? input : 0;
+            case 2 -> Math.abs(input) > rightXThreshold ? input : 0;
+            case 3 -> Math.abs(input) > rightYThreshold ? input : 0;
+            case 4 -> Math.abs(input) > leftTriggerThreshold ? input : 0;
+            case 5 -> Math.abs(input) > rightTriggerThreshold ? input : 0;
+            default -> 0;
+        };
+    }
+
+    /**
+     * Reads current values of all inputs and stores them as the new zero
+     * 
+     */
     public void thisIsZero() {
-
+        leftXThreshold = Math.abs(getLeftX());
+        leftYThreshold = Math.abs(getLeftY());
+        rightXThreshold = Math.abs(getRightX());
+        rightYThreshold = Math.abs(getRightY());
+        leftTriggerThreshold = Math.abs(getLeftTrigger());
+        rightTriggerThreshold = Math.abs(getRightTrigger());
     }
 }

@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     driver.setBuffers(bufferSize); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
+    controller.makeTriggersMakeSense(true);
   }
 
   /**
