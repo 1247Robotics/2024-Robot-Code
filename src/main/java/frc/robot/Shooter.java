@@ -12,6 +12,7 @@ public class Shooter {
     }
 
     public void update(double speed) {
+        System.out.println(speed);
         shooterMotor.set(speed);
     }
 }

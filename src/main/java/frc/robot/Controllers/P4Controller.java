@@ -91,4 +91,24 @@ public class P4Controller extends Controller {
     public boolean getRightJoystickButton() {
         return ps4.getR3Button();
     }
+
+    @Override
+    public boolean getButtonA() {
+        return ps4.getCrossButton();
+    }
+
+    @Override
+    public boolean getButtonB() {
+        return ps4.getCircleButton();
+    }
+
+    @Override
+    public boolean getButtonX() {
+        return ps4.getSquareButton();
+    }
+
+    @Override
+    public boolean getButtonY() {
+        return ps4.getTriangleButton();
+    }
 }
