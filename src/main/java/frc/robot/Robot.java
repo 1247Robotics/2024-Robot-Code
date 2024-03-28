@@ -66,21 +66,21 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // System.out.println("Voltage: " + pdp.getV());
-    if (pdp.isBrownout()){ 
+    // if (pdp.isBrownout()){ 
 
-      if (untilRecheck <= 0) {
-        bufferSize++;
-        driver.setBuffers(bufferSize);
-      }
-      untilRecheck = 4;
+    //   if (untilRecheck <= 0) {
+    //     bufferSize++;
+    //     driver.setBuffers(bufferSize);
+    //   }
+    //   untilRecheck = 4;
       
-    }
-    untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
+    // }
+    // untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
 
     if (light) {
       if (read) {
         int lightLevel = lightSensor.getValue();
-        System.out.println("Light Level: " + lightLevel);
+        // System.out.println("Light Level: " + lightLevel);
       }
       read = !read;
       led.set(read);
