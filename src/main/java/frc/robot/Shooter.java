@@ -14,7 +14,7 @@ public class Shooter {
     public Shooter(int id) {
         this.shooterMotor = new CANSparkMax(id, CANSparkMax.MotorType.kBrushless);
         this.shooterMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
-        this.shooterMotor.disableVoltageCompensation();
+        // this.shooterMotor.disableVoltageCompensation();
         this.shooterMotor.burnFlash();
     }
 
