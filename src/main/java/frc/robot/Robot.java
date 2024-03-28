@@ -130,7 +130,7 @@ public class Robot extends TimedRobot {
     driver.pullController();
     driver.drive();
     intake.update();
-    shooter.update(controller.getButtonA() ? -1 : 0);
+    shooter.update(controller.getButtonA() ? Definitions.shooterSpeed : 0);
   }
 
   /** This function is called once when the robot is disabled. */
