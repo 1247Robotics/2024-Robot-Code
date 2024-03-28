@@ -119,5 +119,17 @@ public class Limelight {
         return distance;
     }
 
+    /**
+     * Convert the degrees output by Tx and Ty to pixels
+     * 
+     * @param degrees
+     * 
+     * @return pixels
+     */
+
+    public double degreesToPixels(double degrees) {
+        return degrees * 20;
+    }
+
     
 }
