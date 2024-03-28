@@ -269,8 +269,7 @@ public class Controller {
         return fixTriggers ? (input + 1) / 2 : input;
     }
 
-    public double clamp(double x, double min, double max) {
-    }
+    public double clamp(double x, double min, double max) {}
 
     public void thisIsZero() {
 
