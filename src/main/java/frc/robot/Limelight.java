@@ -58,9 +58,37 @@ public class Limelight {
      * @return whether the Limelight has any valid targets
      */
     public boolean hasTarget() {
-        return ta.getDouble(0.0) > 0;
+        return table.getEntry("tv").getInteger(0) == 1;
     }
 
+    public double getThor() {
+        return table.getEntry("thor").getDouble(0.0);
+    }
+
+    public double getTvert() {
+        return table.getEntry("tvert").getDouble(0.0);
+    }
+
+    public double getTlong() {
+        return table.getEntry("tlong").getDouble(0.0);
+    }
+
+    public double getTshort() {
+        return table.getEntry("tshort").getDouble(0.0);
+    }
+
+    public String getTclass() {
+        return table.getEntry("tclass").getString("none");
+    }
+
+    /**
+     * Returns the distance to the target.
+     * 
+     * @param objectSize
+     * @param cameraFov
+     * @param objectPercentage
+     * @return
+     */
     private static double calcDistance(double objectSize, double cameraFov, double objectPercentage) {
         // Convert object percentage to a decimal 
         double objectPercentageDecimal = objectPercentage / 100;
@@ -77,6 +105,11 @@ public class Limelight {
         return distance;
     }
 
+    /**
+     * Returns the distance to the target.
+     * 
+     * @return the distance to the target
+     */
     public double getTargetDistance() {
         // Constants
         double cameraHorizontalFov = 63.3;
