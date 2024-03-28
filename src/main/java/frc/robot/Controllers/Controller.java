@@ -274,11 +274,11 @@ public class Controller {
      * @param input
      * @return
      */
-    public double correctTriggers(double input) {
+    protected double correctTriggers(double input) {
         return fixTriggers ? (input + 1) / 2 : input;
     }
 
-    public double clamp(double x, double min, double max) {
+    protected double clamp(double x, double min, double max) {
         return Math.min(Math.max(x, min), max);
     }
 
@@ -297,7 +297,7 @@ public class Controller {
      * 
      * @return the thresholded value of the input
      */
-    public double threshold(double input, int inputNum) {
+    protected double threshold(double input, int inputNum) {
         return switch (inputNum) {
             case 0 -> Math.abs(input) > leftXThreshold ? input : 0;
             case 1 -> Math.abs(input) > leftYThreshold ? input : 0;
