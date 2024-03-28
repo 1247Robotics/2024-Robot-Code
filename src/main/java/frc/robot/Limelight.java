@@ -94,10 +94,13 @@ public class Limelight {
         double angle = objectPercentage * cameraFov;
 
         // Calculate the half angle in radians
-        double halfAngleRadians = Math.toRadians(angle / 2);
-
+        double x = angle / 2;
+        double halfAngleRadians = Math.toRadians(x);
+        x = Math.tan(halfAngleRadians);
+        x = x*2;
+        x = objectSize / x;
         // Use the tangent function to calculate the distance to the object
-        double distance = objectSize / (2 * Math.tan(halfAngleRadians));
+        double distance = x;
 
         return distance;
     }
