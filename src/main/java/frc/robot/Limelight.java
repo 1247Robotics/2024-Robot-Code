@@ -90,11 +90,8 @@ public class Limelight {
      * @return
      */
     private static double calcDistance(double objectSize, double cameraFov, double objectPercentage) {
-        // Convert object percentage to a decimal 
-        double objectPercentageDecimal = objectPercentage / 100;
-
         // Calculate the angle subtended by the object in degrees
-        double angle = objectPercentageDecimal * cameraFov;
+        double angle = objectPercentage * cameraFov;
 
         // Calculate the half angle in radians
         double halfAngleRadians = Math.toRadians(angle / 2);
