@@ -31,7 +31,7 @@ public class Shooter {
                         // throw warnings
                         failures++;
                         if (failures > 20) {
-                            if (failures > 50) {
+                            if (failures > 40) {
                                 DriverStation.reportError("SHOOTER LOCKOUT", false);
                                 lockout = true;
                                 
@@ -45,6 +45,7 @@ public class Shooter {
                 }
             case 0:
                 sinceStart = 0;
+                failures = 0;
                 break;
         }
         shooterMotor.set(speed);
