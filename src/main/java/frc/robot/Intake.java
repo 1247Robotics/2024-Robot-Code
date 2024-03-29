@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Intake {
     private Controller controller;
     private CANSparkMax intakeMotor;
-    private SendableChooser<String> intakeChooser;
+    private SendableChooser<String> intakeChooser = new SendableChooser<>();
     private static final String intakeBrake = "Brake Mode";
     private static final String intakeCoast = "No resistance";
 
