@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();  
+  private final SendableChooser<String> m_chooser = new SendableChooser<>(); 
 
   // STATIC VARIABLES ARE DEFINED IN src/main/java/frc/robot/Definitions.java
 
@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
     // Auto move
     SmartDashboard.putNumber("Autonomous X move (forward)", 0.5);
     SmartDashboard.putNumber("Autonomous Y move (rotate)", 0);
+
+    
     
 
     driver.setBuffers(bufferSize); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
