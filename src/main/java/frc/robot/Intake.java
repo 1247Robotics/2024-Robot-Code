@@ -43,4 +43,8 @@ public class Intake {
         //     intakeMotor.set(0);
         // }
     }
+
+    public void update(double x) {
+        intakeMotor.set(x);
+    }
 }

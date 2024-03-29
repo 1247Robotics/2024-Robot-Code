@@ -48,6 +48,9 @@ public class Robot extends TimedRobot {
   private final Climbers climbers = new Climbers(Definitions.climberLeftId, Definitions.climberRightId);
   private final Limelight limel = new Limelight();
 
+  private int autoDoing = 0;
+  private int autoDoingFor = 0;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -56,7 +59,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Auto
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+    m_chooser.addOption("Chase Note", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putNumber("Auto forward time (s)", 2);
 
@@ -67,6 +70,8 @@ public class Robot extends TimedRobot {
     // Auto move
     SmartDashboard.putNumber("Autonomous X move", 0.5);
     SmartDashboard.putNumber("Autonomous Y move", 0);
+
+    SmartDashboard.putNumber("Target Distance", 0.0);
 
     
     
@@ -96,15 +101,16 @@ public class Robot extends TimedRobot {
     // }
     // untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
 
-    if (light) {
-      if (read) {
-        int lightLevel = lightSensor.getValue();
-        // System.out.println("Light Level: " + lightLevel);
-      }
-      read = !read;
-      led.set(read);
-    }
-    light = !light;
+    // if (light) {
+    //   if (read) {
+    //     int lightLevel = lightSensor.getValue();
+    //     // System.out.println("Light Level: " + lightLevel);
+    //   }
+    //   read = !read;
+    //   led.set(read);
+    // }
+    // light = !light;
+    SmartDashboard.putNumber("Target Distance", limel.getTargetDistance());
 
   }
 
@@ -124,6 +130,8 @@ public class Robot extends TimedRobot {
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
     autoLoops = 0;
+    autoDoing = 0;
+    autoDoingFor = 0;
   }
 
   /** This function is called periodically during autonomous. */
@@ -131,7 +139,28 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-        // Put custom auto code here
+        if (limel.hasTarget()) {
+          driver.setMove(limel.getTx() / 45, Math.max(limel.getTargetDistance()/10, 1));
+          driver.drive();
+          intake.update(1);
+        } else {
+          if (autoDoingFor > 10) {
+            autoDoing = (int) (Math.random()*3);
+          }
+
+          switch (autoDoing) {
+            case 0:
+              driver.setMove(0, 0.8);
+              break;
+            case 1:
+              driver.setMove(-0.2, 0.5);
+              break;
+            case 2:
+              driver.setMove(0.2, 0.5);
+          }
+          driver.drive();
+
+        }
         break;
       case kDefaultAuto:
         // if (autoLoops < SmartDashboard.getNumber("Auto forward time (s)", 2) * 50){
@@ -144,6 +173,7 @@ public class Robot extends TimedRobot {
         //   driver.drive();
         //   autoLoops++;
         // }
+        
         if (autoLoops < 3 * 50) {
           driver.setMove(0.0, -0.5);
           driver.drive();
