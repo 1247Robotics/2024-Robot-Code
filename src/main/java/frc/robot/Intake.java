@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkLowLevel;
 
 import frc.robot.Controllers.Controller;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake {
@@ -23,7 +24,7 @@ public class Intake {
         // Intake
         intakeChooser.setDefaultOption(intakeBrake, intakeBrake);
         intakeChooser.addOption(intakeCoast, intakeCoast);
-        SmartDashboard.putData("Intake Motor Mode", intakeChooser);
+        SmartDashboard.putData(intakeChooser);
     }
 
     public void update(){
