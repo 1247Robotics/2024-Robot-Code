@@ -38,7 +38,7 @@ public class Intake {
                 break;             
         }
         if(controller.getRightBumper()){
-            intakeMotor.set(controller.getLeftY());
+            intakeMotor.set(controller.getRightY());
         } else {
             intakeMotor.set(0);
         }
