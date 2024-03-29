@@ -39,8 +39,9 @@ public class Robot extends TimedRobot {
   private AnalogInput lightSensor = new AnalogInput(0);
   private boolean read = false;
   private boolean light = true;
-  
+
   private final Shooter shooter = new Shooter(Definitions.shooterId);
+  private int autoLoops = 0;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -48,9 +49,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // Auto
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putNumber("Auto forward time (s)", 2);
+
+    // Shooter
+    SmartDashboard.putNumber("Shooter speed", Definitions.shooterSpeed);
+    SmartDashboard.putNumber("Shooter idle speed", Definitions.shooterIdle);
+
+    // Auto move
+    SmartDashboard.putNumber("Autonomous X move (forward)", 0.5);
+    SmartDashboard.putNumber("Autonomous Y move (rotate)", 0);
+    
 
     driver.setBuffers(bufferSize); // Definitions.*  |  BOX_BOT, LOW, MEDIUM, HIGH, EXTREME
     controller.makeTriggersMakeSense(true);
@@ -114,6 +126,12 @@ public class Robot extends TimedRobot {
         // Put custom auto code here
         break;
       case kDefaultAuto:
+        if (autoLoops < SmartDashboard.getNumber("Auto forward time (s)", 2) * 50){
+          driver.setMove(SmartDashboard.getNumber("Autonomous X move (forward)", 0.5), SmartDashboard.getNumber("Autonomous Y move (rotate)", 0));
+          driver.drive();
+          shooter.update(SmartDashboard.getNumber("Shooter speed", Definitions.shooterSpeed));
+          autoLoops++;
+        }
       default:
         // Put default auto code here
         break;
@@ -130,7 +148,7 @@ public class Robot extends TimedRobot {
     driver.pullController();
     driver.drive();
     intake.update();
-    shooter.update(controller.getButtonA() ? Definitions.shooterSpeed : 0);
+    shooter.update(controller.getButtonA() ? Definitions.shooterSpeed : Definitions.shooterIdle);
   }
 
   /** This function is called once when the robot is disabled. */

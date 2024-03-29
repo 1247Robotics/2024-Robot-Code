@@ -21,6 +21,7 @@ public class Definitions {
     public static final int shooterId = 12;
     public static final int shooterTrigger = 1;
     public static final double shooterSpeed = -1;
+    public static final double shooterIdle = -0.2;
 
 
     public static final byte ACC_ADDRESS = 0x40;
