@@ -245,6 +245,18 @@ public class Drive {
     }
 
     /**
+     * Adds x and y to the existing X and Y. Should be called AFTER a standard input calculation
+     * 
+     * @param x
+     * @param y
+     */
+    public void addToMovement(double x, double y) {
+        X += x;
+        Y += y;
+        lastUpdate = System.currentTimeMillis();
+    }
+
+    /**
      * Drives the robot based on the current movement settings.
      * This method should be called periodically to update the robot's movement.
      */
