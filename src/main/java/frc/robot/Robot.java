@@ -132,9 +132,13 @@ public class Robot extends TimedRobot {
         break;
       case kDefaultAuto:
         if (autoLoops < SmartDashboard.getNumber("Auto forward time (s)", 2) * 50){
+          shooter.update(SmartDashboard.getNumber("Shooter speed", Definitions.shooterSpeed));
+          autoLoops++;
+        }
+        autoLoops = 0;
+        if (autoLoops < 100) {
           driver.setMove(SmartDashboard.getNumber("Autonomous X move (forward)", 0.5), SmartDashboard.getNumber("Autonomous Y move (rotate)", 0));
           driver.drive();
-          shooter.update(SmartDashboard.getNumber("Shooter speed", Definitions.shooterSpeed));
           autoLoops++;
         }
       default:
