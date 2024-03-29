@@ -149,6 +149,10 @@ public class Robot extends TimedRobot {
           driver.drive();
           autoLoops++;
         } else {
+          if (limel.hasTarget() && limel.getTclass().equals("ignore") && limel.getTargetDistance() < 10) {
+            driver.setMove(0.0, -0.5);
+            driver.drive();
+          }
           driver.setMove(0,0);
           driver.drive();
         }
