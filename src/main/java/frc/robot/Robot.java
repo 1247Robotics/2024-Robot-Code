@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
   private int autoLoops = 0;
 
   private final Climbers climbers = new Climbers(Definitions.climberLeftId, Definitions.climberRightId);
-  private final Limelight limel = new Limelight();
+  // private final Limelight limel = new Limelight();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -156,9 +156,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     driver.pullController();
-    if (controller.getButtonY() && limel.hasTarget()) {
-      driver.addToMovement(0, limel.getTx() / 100);
-    }
+    // if (controller.getButtonY() && limel.hasTarget()) {
+    //   driver.addToMovement(0, limel.getTx() / 100);
+    // }
     driver.drive();
     intake.update();
     shooter.update(controller.getButtonA() ? Definitions.shooterSpeed : Definitions.shooterIdle);
