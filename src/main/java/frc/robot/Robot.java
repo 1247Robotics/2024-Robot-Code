@@ -65,8 +65,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Shooter idle speed", Definitions.shooterIdle);
 
     // Auto move
-    SmartDashboard.putNumber("Autonomous X move (forward)", 0.5);
-    SmartDashboard.putNumber("Autonomous Y move (rotate)", 0);
+    SmartDashboard.putNumber("Autonomous X move", 0.5);
+    SmartDashboard.putNumber("Autonomous Y move", 0);
 
     
     
@@ -144,8 +144,9 @@ public class Robot extends TimedRobot {
         //   autoLoops++;
         // }
         if (autoLoops < 3 * 50) {
-          driver.setMove(-0.75, 0);
+          driver.setMove(SmartDashboard.getNumber("Autonomous X move", 0.0), SmartDashboard.getNumber("Autonomous Y move", 0.0));
           driver.drive();
+          autoLoops++;
         }
       default:
         // Put default auto code here

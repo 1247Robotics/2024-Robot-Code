@@ -37,10 +37,10 @@ public class Intake {
                 intakeMotor.setIdleMode(CANSparkMax.IdleMode.kCoast);
                 break;             
         }
-        if(controller.getRightBumper()){
-            intakeMotor.set(controller.getRightY());
-        } else {
-            intakeMotor.set(0);
-        }
+        // if(controller.getRightBumper()){
+        intakeMotor.set(controller.getRightY());
+        // } else {
+        //     intakeMotor.set(0);
+        // }
     }
 }
