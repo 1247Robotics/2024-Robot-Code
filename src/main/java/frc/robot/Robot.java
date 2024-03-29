@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter = new Shooter(Definitions.shooterId);
   private int autoLoops = 0;
 
+  private final Climbers climbers = new Climbers(Definitions.climberLeftId, Definitions.climberRightId);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -149,6 +151,13 @@ public class Robot extends TimedRobot {
     driver.drive();
     intake.update();
     shooter.update(controller.getButtonA() ? Definitions.shooterSpeed : Definitions.shooterIdle);
+    if (controller.getLeftTrigger() > 0.05) {
+      climbers.setSpeed(controller.getLeftTrigger());
+    } else if (controller.getRightTrigger() > 0.05) {
+      climbers.setSpeed(-controller.getRightTrigger());
+    } else {
+      climbers.setSpeed(0);
+    }
   }
 
   /** This function is called once when the robot is disabled. */

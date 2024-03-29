@@ -23,6 +23,9 @@ public class Definitions {
     public static final double shooterSpeed = -1;
     public static final double shooterIdle = -0.2;
 
+    public static final int climberLeftId = 13;
+    public static final int climberRightId = 14;
+
 
     public static final byte ACC_ADDRESS = 0x40;
     public static final byte ACC_RESET = 0x10;
