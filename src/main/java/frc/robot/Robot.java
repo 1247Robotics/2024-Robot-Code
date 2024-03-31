@@ -5,15 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Controllers.P4Controller;
-import frc.robot.Controllers.P5Controller;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.AnalogGyro;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,15 +30,7 @@ public class Robot extends TimedRobot {
   private final P4Controller controller = new P4Controller(0);  // P4Controller, XController, P5Controller, JoystickController, Controller (always 0)
   private final Drive driver = new Drive(controller, mp);
   private final Intake intake = new Intake(controller);
-  private final PDP pdp = new PDP();
   private int bufferSize = 1;
-  private int untilRecheck = 0;
-  private DigitalOutput led = new DigitalOutput(0);
-  private DigitalOutput led2 = new DigitalOutput(1);
-  private AnalogInput lightSensor = new AnalogInput(0);
-  private boolean read = false;
-  private boolean light = true;
-
   private final Shooter shooter = new Shooter(Definitions.shooterId);
   private int autoLoops = 0;
 
@@ -89,27 +78,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    // System.out.println("Voltage: " + pdp.getV());
-    // if (pdp.isBrownout()){ 
-
-    //   if (untilRecheck <= 0) {
-    //     bufferSize++;
-    //     driver.setBuffers(bufferSize);
-    //   }
-    //   untilRecheck = 4;
-      
-    // }
-    // untilRecheck = untilRecheck > 0 ? untilRecheck - 1 : 0;
-
-    // if (light) {
-    //   if (read) {
-    //     int lightLevel = lightSensor.getValue();
-    //     // System.out.println("Light Level: " + lightLevel);
-    //   }
-    //   read = !read;
-    //   led.set(read);
-    // }
-    // light = !light;
     SmartDashboard.putNumber("Target Distance", limel.getTargetDistance());
 
   }
@@ -142,38 +110,9 @@ public class Robot extends TimedRobot {
         if (limel.hasTarget()) {
           driver.setMove(limel.getTx() / 45, Math.max(limel.getTargetDistance()/10, 1));
           driver.drive();
-          intake.update(1);
-        } else {
-          if (autoDoingFor > 10) {
-            autoDoing = (int) (Math.random()*3);
-          }
-
-          switch (autoDoing) {
-            case 0:
-              driver.setMove(0, 0.8);
-              break;
-            case 1:
-              driver.setMove(-0.2, 0.5);
-              break;
-            case 2:
-              driver.setMove(0.2, 0.5);
-          }
-          driver.drive();
-
         }
         break;
-      case kDefaultAuto:
-        // if (autoLoops < SmartDashboard.getNumber("Auto forward time (s)", 2) * 50){
-        //   shooter.update(SmartDashboard.getNumber("Shooter speed", Definitions.shooterSpeed));
-        //   autoLoops++;
-        // }
-        // autoLoops = 0;
-        // if (autoLoops < 100) {
-        //   driver.setMove(SmartDashboard.getNumber("Autonomous X move (forward)", 0.5), SmartDashboard.getNumber("Autonomous Y move (rotate)", 0));
-        //   driver.drive();
-        //   autoLoops++;
-        // }
-        
+      case kDefaultAuto:        
         if (autoLoops < 3 * 50) {
           driver.setMove(0.0, -0.5);
           driver.drive();
