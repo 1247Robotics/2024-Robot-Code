@@ -3,6 +3,7 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 
 import frc.robot.Controllers.Controller;
+import frc.robot.VirtualIMU.VirtualIMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
@@ -13,6 +14,7 @@ public class Drive {
     private Controller controller;
 
     private final DifferentialDrive drive;
+    private final VirtualIMU trackMotion;
 
     private double X = 0;
     private double Y = 0;
@@ -39,6 +41,7 @@ public class Drive {
         brMotor.follow(frMotor);
 
         drive = new DifferentialDrive(flMotor, frMotor);
+        trackMotion = new VirtualIMU(flMotor, frMotor);
     }
 
     /**
@@ -49,6 +52,10 @@ public class Drive {
      */
     public Drive(Controller controller, MotorPack mp) {
         this(controller, mp.getFlMotor(), mp.getFrMotor(), mp.getBlMotor(), mp.getBrMotor());
+    }
+
+    public void updateMotors() {
+        trackMotion.updateMotors();
     }
 
     public void setBuffers(int bufferSize) {

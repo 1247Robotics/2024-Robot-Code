@@ -79,6 +79,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Target Distance", limel.getTargetDistance());
+    driver.updateMotors(); // Ensure that the position calculations are always up to date
 
   }
 
