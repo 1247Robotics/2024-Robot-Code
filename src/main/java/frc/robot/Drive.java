@@ -58,6 +58,10 @@ public class Drive {
         trackMotion.updateMotors();
     }
 
+    public VirtualIMU getVirtualIMU() {
+        return trackMotion;
+    }
+
     public void setBuffers(int bufferSize) {
         XBuffer = new double[bufferSize];
         YBuffer = new double[bufferSize];

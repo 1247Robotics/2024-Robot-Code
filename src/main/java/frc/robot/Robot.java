@@ -80,6 +80,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("Target Distance", limel.getTargetDistance());
     driver.updateMotors(); // Ensure that the position calculations are always up to date
+    double[] pos = driver.getVirtualIMU().getPosition();
+    System.out.println(pos);
 
   }
 
