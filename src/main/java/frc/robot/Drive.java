@@ -277,6 +277,9 @@ public class Drive {
             X = 0;
             Y = 0;
         }
+        double speedMultiplier = 1;
+        X *= speedMultiplier;
+        Y *= speedMultiplier;
         drive.arcadeDrive(Y, X);
     }
 

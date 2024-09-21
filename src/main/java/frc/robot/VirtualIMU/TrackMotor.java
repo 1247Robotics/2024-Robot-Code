@@ -72,7 +72,7 @@ public class TrackMotor {
         lastEncoderPosition = encoderPosition;
 
         double angleTheta = encoderToDegrees(difference);
-        double distance = degreesToDistance(angleTheta);
+        double distance = -degreesToDistance(angleTheta);
         distance /= gearRatio;
 
         velocity = calculateVelocity(distance);

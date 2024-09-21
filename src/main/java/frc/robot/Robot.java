@@ -81,7 +81,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Target Distance", limel.getTargetDistance());
     driver.updateMotors(); // Ensure that the position calculations are always up to date
     double[] pos = driver.getVirtualIMU().getPosition();
-    System.out.println(pos);
+    
+    // System.out.println("("+pos[0]+", "+pos[1]+"), Theta: "+pos[2]);
 
   }
 
